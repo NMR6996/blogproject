@@ -26,16 +26,7 @@ class About(models.Model):
     title = models.CharField(max_length=200)
     text = RichTextField()
     images = models.ImageField(upload_to="about/", blank=True, null=True)
-    is_active = models.BooleanField(default=True)
-
-    def is_check(self):
-        if About.objects.all().count() >= 2:
-            self.is_active = False
-        return self.is_active
-
-    def save(self, *args, **kwargs):
-        self.is_active = self.is_check()
-        return Super(About, self).save(*args, **kwargs)
+    is_active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
