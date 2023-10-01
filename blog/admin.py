@@ -4,8 +4,8 @@ from .models import Blog, About, Contact, ContactUs, BlogComment
 
 # Register your models here.
 class AdminBlog(admin.ModelAdmin):
-    list_display = ("title", "date", "first")
-    list_editable = ("first",)
+    list_display = ("title", "date", "first", "is_comment")
+    list_editable = ("first", "is_comment")
 
 
 class AdminAbout(admin.ModelAdmin):

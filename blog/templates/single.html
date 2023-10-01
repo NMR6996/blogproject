@@ -43,7 +43,8 @@
 {#                <a href="" class="btn btn-sm btn-outline-primary mb-1">Lorem</a>#}
 {#                <a href="" class="btn btn-sm btn-outline-primary mb-1">Lorem</a>#}
 {#            </div>#}
-            <div class="col-12 py-4">
+            {% if blog.is_comment %}
+                <div class="col-12 py-4">
             {% for message in messages %}
             <div id="success" style="background-color: rgba(0, 128, 0, 0.6); line-height: 2; color:red; font-weight: bold;">{{ message }}</div>
             {% endfor %}
@@ -58,7 +59,7 @@
                 </div>
                 {% endfor %}
             </div>
-            <div class="col-12">
+                <div class="col-12">
                 <h3 class="mb-4 font-weight-bold">Rəy yazın</h3>
                 <form method="post">
                     {% csrf_token %}
@@ -79,6 +80,9 @@
                     </div>
                 </form>
             </div>
+            {% else %}
+                <h3 class="mb-4 font-weight-bold" style="background-color: rgba(255, 0, 0, 0.5);"> Bu blog üçün rəylər deaktivdir! </h3>
+            {% endif %}
         </div>
     </div>
     <!-- Blog Detail End -->

@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import messages
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Blog, About, Contact, ContactUs, BlogComment
 
 
@@ -39,6 +39,14 @@ def contact(request):
 
 def blog(request):
     blogs = Blog.objects.all()
+    blogpaginator = Paginator(blogs, 3)
+    page = request.GET.get('page')
+    try:
+        blogs = blogpaginator.page(page)
+    except PageNotAnInteger:
+        blogs = blogpaginator.page(1)
+    except EmptyPage:
+        blogs = blogpaginator.page(blogpaginator.num_pages)
     return render(request, "blog.html", {"blogs": blogs})
 
 

@@ -9,14 +9,7 @@ class Blog(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     images = models.ImageField(upload_to="blog/")
     first = models.BooleanField(default=False)
-
-    def is_first(self):
-        if not Blog.objects.filter(first=True):
-            return True
-
-    def save(self, *args, **kwargs):
-        self.first = self.is_first()
-        return super(Blog, self).save(*args, **kwargs)
+    is_comment = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
